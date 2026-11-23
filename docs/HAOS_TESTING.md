@@ -1,6 +1,6 @@
 # HAOS test procedure
 
-## Verified starting point (2026-11-22)
+## Verified starting point (rechecked 2026-11-23)
 
 Read-only Supervisor inventory:
 

@@ -13,6 +13,8 @@ HAOS functional playback testing are pending.
 | Official HAOS add-on | `91b6950e8e57dc0be559e1cc9cd9c81f2390cd97` |
 | Pinned MA test runtime from template | `126c6d646ec14ee680e7051258e82dab0a09bac2` |
 | Local Python | 3.14.7, existing interpreter via `.venv/bin/python` |
+| Linux CI Python | 3.14.4 |
+| First successful GitHub CI source | `3ba7838da4cf8ff0cf66d0b36e838303d5255535` |
 | Standalone provider content SHA256 | `5a376d72b1616fb7cee3ee22ef84c8e58e6983a287d120facee2d414bc8c12da` |
 
 The working checkout was clean before inspection and remains unchanged. Its current
@@ -38,11 +40,19 @@ the configured account. No global Python installation or PATH change was made.
 | Live subscription entitlement | Passed |
 | Live show/track metadata | Show 1747 contains track 29990 (Axilla) |
 | Live token refresh | Passed after forcing only the in-memory token/entitlement deadlines to expire |
+| GitHub Linux tests | 149 passed on Python 3.14.4 |
+| GitHub Linux lint/types/spelling | Passed |
+| Official nightly container check | Passed: `livephish: passed` |
 
-The catalog checker above ran **on macOS against the template's pinned server**, not
-in the official Linux nightly image. Docker is not available in this environment.
-Linux amd64/arm64 installation compatibility and actual current-channel behavior
-remain CI/HAOS work. The reusable official nightly catalog workflow is configured.
+The initial local catalog check ran on macOS against the template's pinned server.
+On 2026-11-23, [GitHub CI run 45234614930](https://github.com/tube0013/ma-provider-livephish/actions/runs/45234614930)
+also passed all jobs on Linux: tests, lint/types/spelling and the official reusable
+nightly catalog workflow. The latter ran in `ghcr.io/music-assistant/server:nightly`,
+image digest `sha256:4589c6a7396a68e878c468898948ec5c439cdf49bb8e091df5a2aea42c6efe90`.
+It checks installation/import on Linux amd64 and resolves any extra provider requirements
+for arm64; there are no extra provider requirements here. An arm64 runtime/playback test
+has not been performed. CI installation/import success does not establish audible HAOS
+playback or the installed HAOS nightly's exact runtime behavior.
 
 Local verification commands:
 
@@ -80,12 +90,13 @@ The original album-browse and search parsing were split into private helpers to 
 the template's complexity checks. No other feature rewrite was undertaken. The original
 checkout has not received these standalone changes.
 
-## Pending before submission
+## Publication status and remaining HAOS work
 
-- GitHub owner/repository confirmed on 2026-11-23; public publication and a normal
-  `v0.1.0` release were explicitly authorized. Catalog submission remains on hold.
-- Source provenance review completed; see PROVENANCE.md and NOTICE.
-- GitHub Linux CI must pass before the initial release is published.
+GitHub owner/repository `tube0013/ma-provider-livephish` was confirmed and published
+publicly on 2026-11-23. GitHub detects Apache-2.0. Source provenance review is complete
+(see PROVENANCE.md and NOTICE). A normal `v0.1.0` testing release was explicitly
+requested; catalog submission remains on hold.
+
 - Coordinate the HAOS test window and speaker. NIGHTLY `2.11.0.dev2026112203` is running;
   stable `2.10.13` is installed but stopped. DEV SERVER is not installed.
 - Complete audible playback, seeking, natural next-track transitions, full HAOS restart,

@@ -11,7 +11,9 @@ the provider's manifest stage remains alpha.
 ### Validation
 
 149 local tests pass, including real-MA discovery, secure setup, rejected login and
-provider reload recovery. Pre-commit checks pass. Live account login, entitlement,
+provider reload recovery. All [Linux CI jobs](https://github.com/tube0013/ma-provider-livephish/actions/runs/45234614930)
+passed, including 149 tests, lint/types/spelling and the official nightly catalog
+container check. Pre-commit checks pass. Live account login, entitlement,
 show 1747 / Axilla metadata and forced in-memory token refresh were verified.
 Source provenance and component attribution are documented in
 [PROVENANCE.md](https://github.com/tube0013/ma-provider-livephish/blob/v0.1.0/docs/PROVENANCE.md).

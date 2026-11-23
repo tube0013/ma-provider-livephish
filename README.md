@@ -85,7 +85,7 @@ and include MA version, provider release, player type and
 steps to reproduce. Remove credentials, cookies, tokens, account identifiers and signed
 stream URLs from any logs before sharing them. Start with info logging.
 
-[Release and submission procedure](docs/RELEASING.md) includes the proposed first release
+[Release and submission procedure](docs/RELEASING.md) covers the first release
 and the official submission form. Follow the
 [community catalog rules](https://github.com/music-assistant/.github/blob/main/COMMUNITY_CATALOG_RULES.md)
 and Music Assistant's
