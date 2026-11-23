@@ -1,18 +1,19 @@
 # HAOS test procedure
 
-## Verified starting point (rechecked 2026-11-23)
+## Verified HAOS test environment (2026-11-23)
 
-Read-only Supervisor inventory:
+Read-only Supervisor inventory after the maintainer's playback tests:
 
 | App | Installed version | State |
 | --- | --- | --- |
-| Music Assistant NIGHTLY | 2.11.0.dev2026112203 | Started |
+| Music Assistant NIGHTLY | 2.11.0.dev2026112303 | Stopped |
 | Music Assistant | 2.10.13 | Stopped |
-| Music Assistant DEV SERVER | Not installed | — |
+| Music Assistant DEV SERVER | 2.11.0.dev2026112303 | Started |
 
-Recheck this inventory immediately before testing. No HAOS apps have been stopped,
-installed, reconfigured or started during preparation. The running NIGHTLY app is the
-one to return to afterward, unless the user chooses differently.
+The maintainer installed and operated DEV SERVER, entered credentials securely, and
+performed the acceptance tests below. The assistant only read the app inventory and
+recorded the report; it did not change HAOS configuration or playback. App version is
+Supervisor-reported; an independent in-app server build string was not captured.
 
 ## Prerequisites
 
@@ -54,30 +55,45 @@ keep its volume low. A restart fetches updated provider code.
 
 ## Playback acceptance record
 
-Run each case on the chosen HAOS player. Record provider commit, MA version, quality,
-player model/protocol, time, observed behavior and pass/fail. Do not record service URLs.
+On 2026-11-23 the maintainer reported successful testing of the published standalone
+provider in HAOS DEV SERVER. These are maintainer-observed functional results, distinct
+from the automated tests. The maintainer also confirmed that these behaviors had worked
+in the original local provider implementation before standalone packaging.
 
-| Case | Action | Expected result | Result |
-| --- | --- | --- | --- |
-| Login | Add LivePhish with an entitled account | Provider loads; catalog and setlist appear | Pending |
-| Baseline | Play Axilla, show 1747, track 1747:29990 | Audible playback; elapsed time advances | Pending |
-| Seek | Seek forward to 60 seconds, backward to 15 | Audio resumes near requested position | Pending |
-| Transition | Queue two consecutive tracks from show 1747, let the first end | Next track starts once, in order | Pending |
-| Manual next | Skip forward and back within the queue | Correct performances play; no stale URL failures | Pending |
-| Restart | Stop audio, restart DEV SERVER, resolve 1747:29990 again | Fresh login/entitlement and correct metadata/playback | Pending |
-| Entitlement refresh | After over 15 minutes, start another track | Recheck succeeds without a login prompt | Pending |
-| Token expiry | After the actual token lifetime, start a new track | Refresh/relogin succeeds without leaking tokens | Pending |
-| Quality | Test AAC, auto and entitled lossless separately | Only entitled quality plays; codec verified by MA | Pending |
-| Concurrent playback | Attempt a second independent MA queue on a second player | MA honors the provider's one-stream limit | Pending |
-| Recovery | Stop playback, temporarily disconnect network, then reconnect/retry | Safe error, then recovery without a request storm | Pending |
+The screenshot supplied with the test report identifies the playback example as **Strange Design**, Trey
+Anastasio, **11/21/26 Divided Sky Benefit with Billy Strings, Worcester, MA**,
+provider track `2834:41607`. It shows the selected player **Amzn Echo Show 5 White**,
+FLAC input at **44.1 kHz / 16-bit / stereo**, and FLAC output at
+**48 kHz / 16-bit / stereo**. The selected protocol and exact quality-option settings
+were not separately recorded. The screenshot is not copied into this repository.
+
+| Case | Observed action | Result and evidence |
+| --- | --- | --- |
+| Login and browsing | Add provider, sign in, browse catalog, select a show and track | Passed — maintainer report |
+| Playback | Start selected tracks | Passed — all attempted streams worked per maintainer; screenshot confirms the example above |
+| Backward seek | Seek backward in the playing track | Passed — maintainer reported no issues |
+| Natural transition | Let playback advance from one track to the next | Passed — maintainer report |
+| Manual next | Manually advance to the next track | Passed — maintainer report |
+| App restart recovery | Stop DEV SERVER, start it fresh, browse and play again | Passed — maintainer report |
+| Lossless playback | Play the screenshot example on the Echo Show | Passed — FLAC input/output confirmed by MA's signal-path display |
+
+Forward seeking, manual previous, every individual AAC/FLAC/ALAC option, natural token
+expiry, concurrent-queue enforcement and network-outage recovery were not individually
+identified in this report. The existing automated tests cover refresh/rejection,
+entitlement/quality selection, URL handling and throttling; a prior real-account probe
+also verified forced in-memory token expiry and refresh. These distinctions do not
+invalidate the successful functional playback acceptance above.
+
+For future regression runs, record the exact provider ref, in-app MA version, player
+protocol, selected quality option and elapsed session duration. Do not record service URLs.
 
 Do not provoke real 429s or change subscription/region to test denials. Mocked tests cover
 those failure paths. Account-wide limits across other LivePhish apps still require the
 user to stop those clients; the provider cannot police external sessions.
 
 Natural token expiry on HAOS is distinct from the successful forced in-memory refresh
-probe documented in VALIDATION.md. Audible playback, seeking and transitions cannot be
-inferred from passing import checks or the `can_seek` flag.
+probe documented in VALIDATION.md. Playback, backward seeking, transitions and app restart
+recovery now have maintainer-observed HAOS evidence.
 
 ## Return to production
 

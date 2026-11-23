@@ -1,7 +1,8 @@
 # Validation record
 
-Prepared 2026-11-22; publication review updated 2026-11-23. Catalog admission and
-HAOS functional playback testing are pending.
+Prepared 2026-11-22; publication and HAOS acceptance updated 2026-11-23.
+The maintainer reports successful HAOS functional playback testing. Catalog submission
+and admission remain on hold.
 
 ## Source and runtime
 
@@ -43,6 +44,11 @@ the configured account. No global Python installation or PATH change was made.
 | GitHub Linux tests | 149 passed on Python 3.14.4 |
 | GitHub Linux lint/types/spelling | Passed |
 | Official nightly container check | Passed: `livephish: passed` |
+| HAOS login, browse and playback | Passed — maintainer report on 2026-11-23 |
+| HAOS backward seeking | Passed — maintainer report |
+| HAOS natural transition and manual next | Passed — maintainer report |
+| HAOS app restart recovery | Passed — maintainer stopped/started DEV SERVER, then browsed and played successfully |
+| HAOS lossless signal path | Screenshot: FLAC 44.1 kHz / 16-bit stereo input, FLAC 48 kHz / 16-bit stereo output on Amzn Echo Show 5 White |
 
 The initial local catalog check ran on macOS against the template's pinned server.
 On 2026-11-23, [GitHub CI run 45234614930](https://github.com/tube0013/ma-provider-livephish/actions/runs/45234614930)
@@ -50,9 +56,10 @@ also passed all jobs on Linux: tests, lint/types/spelling and the official reusa
 nightly catalog workflow. The latter ran in `ghcr.io/music-assistant/server:nightly`,
 image digest `sha256:4589c6a7396a68e878c468898948ec5c439cdf49bb8e091df5a2aea42c6efe90`.
 It checks installation/import on Linux amd64 and resolves any extra provider requirements
-for arm64; there are no extra provider requirements here. An arm64 runtime/playback test
-has not been performed. CI installation/import success does not establish audible HAOS
-playback or the installed HAOS nightly's exact runtime behavior.
+for arm64; there are no extra provider requirements here. The CI run does not establish
+arm64 playback coverage, and the HAOS host architecture was not captured. CI installation/import
+success is separate from the maintainer-reported HAOS playback results now
+recorded in HAOS_TESTING.md.
 
 Local verification commands:
 
@@ -90,18 +97,29 @@ The original album-browse and search parsing were split into private helpers to 
 the template's complexity checks. No other feature rewrite was undertaken. The original
 checkout has not received these standalone changes.
 
-## Publication status and remaining HAOS work
+## Publication and HAOS acceptance status
 
-GitHub owner/repository `tube0013/ma-provider-livephish` was confirmed and published
-publicly on 2026-11-23. GitHub detects Apache-2.0. Source provenance review is complete
-(see PROVENANCE.md and NOTICE). A normal `v0.1.0` testing release was explicitly
-requested; catalog submission remains on hold.
+The public repository and normal `v0.1.0` release were published on 2026-11-23 at
+`0aea80f7fe72e452cc623edaf2eebd5000f5a773`. [Final CI run 45235274555](https://github.com/tube0013/ma-provider-livephish/actions/runs/45235274555)
+passed all jobs on that exact commit. The published archive was verified against the
+provider content hash above. GitHub detects Apache-2.0. Source provenance review is
+complete (see PROVENANCE.md and NOTICE). Catalog submission remains on hold.
 
-- Coordinate the HAOS test window and speaker. NIGHTLY `2.11.0.dev2026112203` is running;
-  stable `2.10.13` is installed but stopped. DEV SERVER is not installed.
-- Complete audible playback, seeking, natural next-track transitions, full HAOS restart,
-  natural token expiry, quality and concurrent-stream acceptance in HAOS_TESTING.md.
+The maintainer subsequently installed DEV SERVER, added LivePhish, signed in, browsed,
+and successfully tested playback, backward seeking, automatic next-track transitions,
+manual next and stop/start app recovery. All attempted audio streams worked. The
+screenshot confirms lossless FLAC for Strange Design, provider track `2834:41607`,
+on Amzn Echo Show 5 White. See HAOS_TESTING.md for the detailed acceptance record.
 
-Passing a forced refresh probe is not evidence of a complete natural-expiry playback
-session. Passing a provider reload test is not evidence of HAOS restart recovery.
-Stable 2.10 compatibility is unverified and is not claimed.
+A read-only Supervisor check on 2026-11-23 found DEV SERVER
+`2.11.0.dev2026112303` started, NIGHTLY `2.11.0.dev2026112303` stopped, and stable
+`2.10.13` stopped. The app version was read independently; the playback observations
+are the maintainer's report, supported by the screenshot's signal-path details.
+
+Natural token expiry over a complete HAOS session was not specifically reported;
+the earlier real-account forced refresh and mocked expiry tests remain its current
+evidence. Individual quality-option coverage, concurrent-queue enforcement and outage
+recovery were not itemized. Stable 2.10 compatibility is unverified and is not claimed.
+
+This documentation update records successful testing. Provider code and the published
+v0.1.0 tag and release assets are unchanged; catalog submission remains pending.
