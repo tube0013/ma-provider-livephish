@@ -16,10 +16,10 @@ one to return to afterward, unless the user chooses differently.
 
 ## Prerequisites
 
-1. Confirm GitHub owner/repository and authorize publication separately. The repository
-   must be public; it need not be admitted to the catalog for this development route.
-2. Publish the test branch only after local checks pass. The proposed branch is
-   `codex/community-catalog-prep` in `tube0013/ma-provider-livephish`.
+1. Use the confirmed public repository `tube0013/ma-provider-livephish`.
+2. Use the `v0.1.0` release tag for a reproducible first test. Development branches,
+   including `codex/community-catalog-prep`, can also be loaded directly; a release
+   is not required by the DEV SERVER repository route.
 3. Agree with the user on a test window and speaker before stopping the running NIGHTLY
    app or changing playback. Stop playback in other LivePhish clients too.
 4. In the Home Assistant app store, use the official repository
@@ -30,15 +30,15 @@ one to return to afterward, unless the user chooses differently.
 The normal MA Marketplace is not an arbitrary GitHub repository installer.
 The supported direct-repository route is the DEV SERVER app.
 
-## Exact proposed DEV SERVER options
+## Exact DEV SERVER options
 
-After confirming the proposed repository name and publishing that branch:
+For the initial release:
 
 ```yaml
 log_level: info
 server_repo: ""
 frontend_repo: ""
-provider_repo: "tube0013/ma-provider-livephish@codex/community-catalog-prep"
+provider_repo: "tube0013/ma-provider-livephish@v0.1.0"
 safe_mode: false
 ```
 

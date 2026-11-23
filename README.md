@@ -6,9 +6,10 @@ releases and playlists, and play audio through Music Assistant to your own speak
 An active LivePhish streaming subscription is required. LivePhish, Nugs and Phish do
 not sponsor or endorse this provider.
 
-This repository is prepared for testing; it is **not yet published or admitted to the
-community catalog**. The proposed repository address is
-`tube0013/ma-provider-livephish`, pending the maintainer's confirmation.
+This provider is **not yet admitted to the community catalog**. The initial `v0.1.0`
+release is intended for testing with the nightly-based HAOS DEV SERVER. See
+[releases](https://github.com/tube0013/ma-provider-livephish/releases) and the
+[validation record](docs/VALIDATION.md) for the current evidence and limitations.
 
 ## Features and account access
 
@@ -32,7 +33,9 @@ account library responses expire after a minute. Caches are bounded and stay in 
 
 Once this provider has a published release and has been admitted, enable the community
 catalog in Music Assistant's Marketplace and install LivePhish there. Until then, use
-the [HAOS DEV SERVER testing procedure](docs/HAOS_TESTING.md).
+the [HAOS DEV SERVER testing procedure](docs/HAOS_TESTING.md). A normal NIGHTLY app
+cannot install an arbitrary provider repository through Marketplace; publishing a
+release does not change that.
 
 Add LivePhish under Settings → Music sources. Enter your LivePhish email and password
 in MA's setup form. MA stores setup secrets encrypted in its own configuration. Access
@@ -78,7 +81,7 @@ catalog checks. Those catalog checks verify installation and import, not audible
 ## Support and release
 
 Report reproducible problems in the [provider issue tracker](https://github.com/tube0013/ma-provider-livephish/issues)
-once the repository is public. Include MA version, provider release, player type and
+and include MA version, provider release, player type and
 steps to reproduce. Remove credentials, cookies, tokens, account identifiers and signed
 stream URLs from any logs before sharing them. Start with info logging.
 
@@ -92,4 +95,5 @@ and Music Assistant's
 
 Apache-2.0; see [LICENSE](LICENSE) and [NOTICE](NOTICE). The standalone layout and checks
 come from the official community-provider template. The MA Nugs provider and the
-LivePhish protocol research reference are recorded in NOTICE. No downloader is included.
+LivePhish protocol research reference are recorded in NOTICE and the completed
+[source provenance review](docs/PROVENANCE.md). No downloader is included.

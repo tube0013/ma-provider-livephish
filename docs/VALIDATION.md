@@ -1,6 +1,7 @@
 # Validation record
 
-Prepared 2026-11-22. This is a local candidate, not a published release or catalog admission.
+Prepared 2026-11-22; publication review updated 2026-11-23. Catalog admission and
+HAOS functional playback testing are pending.
 
 ## Source and runtime
 
@@ -73,7 +74,7 @@ requested and no audio was downloaded, written or played.
 | Audio URLs | Existing fix retained: accept HTTP/HTTPS with host, reject userinfo/invalid URLs, return the signed string unchanged only to MA's internal stream resolver |
 | Stream limit | Existing `max_concurrent_streams = 1`, single provider instance; cannot enforce sessions opened in external apps |
 | Setup/data | Existing username/password and quality keys retained; no stored-data migration introduced |
-| Packaging | `livephish/`, English manifest/setup strings, provides, real existing codeowner, proposed documentation/support URLs, Apache-2.0, NOTICE, template CI and lockfile |
+| Packaging | `livephish/`, English manifest/setup strings, provides, real existing codeowner, confirmed documentation/support URLs, Apache-2.0, NOTICE, template CI and lockfile |
 
 The original album-browse and search parsing were split into private helpers to meet
 the template's complexity checks. No other feature rewrite was undertaken. The original
@@ -81,12 +82,10 @@ checkout has not received these standalone changes.
 
 ## Pending before submission
 
-- Confirm GitHub owner/repository. `@tube0013` comes from the existing manifest;
-  `tube0013/ma-provider-livephish` is provisional. No remote, release, issue or GitHub
-  message has been created.
-- Confirm source provenance before publication: the LivePhish research reference has no
-  license file at the inspected commit. See NOTICE and RELEASING.md.
-- Authorize publication separately, then run GitHub CI in the official Linux nightly image.
+- GitHub owner/repository confirmed on 2026-11-23; public publication and a normal
+  `v0.1.0` release were explicitly authorized. Catalog submission remains on hold.
+- Source provenance review completed; see PROVENANCE.md and NOTICE.
+- GitHub Linux CI must pass before the initial release is published.
 - Coordinate the HAOS test window and speaker. NIGHTLY `2.11.0.dev2026112203` is running;
   stable `2.10.13` is installed but stopped. DEV SERVER is not installed.
 - Complete audible playback, seeking, natural next-track transitions, full HAOS restart,

@@ -5,18 +5,16 @@ and a catalog submission each require the maintainer's explicit request.
 
 ## Gates before publication and release
 
-- Confirm `@tube0013` and the proposed repository `tube0013/ma-provider-livephish`.
-  Replace that address in manifest links, README and HAOS_TESTING.md if it changes.
-- Confirm the original experimental provider's source provenance. The API research
-  reference has no license file at the inspected revision; see NOTICE. No Go source is
-  included in this repository. Resolve any inherited code licensing uncertainty before
-  publication. Keep the template/server Apache-2.0 attribution and LICENSE.
+- Owner and repository confirmed on 2026-11-23: `tube0013/ma-provider-livephish`.
+  Publication and a normal `v0.1.0` release were explicitly authorized in the session.
+  Catalog submission remains unauthorized.
+- Source provenance review completed: see PROVENANCE.md and NOTICE. The reference
+  project's Go source is not included or treated as Apache-licensed.
 - Run `.venv/bin/python -m pytest` and
   `.venv/bin/python -m pre_commit run --all-files` with the committed lockfile.
-- After publication is authorized, create the public GitHub repository and push the
-  reviewed `codex/community-catalog-prep` branch. No remote is configured locally yet.
-  Run its CI, including `catalog`, in the official nightly Linux server image. Do not
-  treat the passing local macOS check as Linux CI evidence.
+- Publish the reviewed source and run CI, including `catalog`, in the official
+  nightly Linux server image. Do not treat the passing local macOS check as Linux
+  CI evidence.
 - Complete and record the HAOS acceptance table before submission. An import check
   cannot establish playback, seeking or transitions.
 - Keep domain `livephish`, setup keys `username`/`password`, the `quality` option and
@@ -57,7 +55,7 @@ The submitter must own the repository or be a code owner in its released manifes
 
 | Field | Proposed value |
 | --- | --- |
-| Repository | `tube0013/ma-provider-livephish` (confirm first) |
+| Repository | `tube0013/ma-provider-livephish` |
 | Folder | `livephish` |
 | Tag prefix | Leave empty |
 | Moving from the server | Leave unchecked: this is a local experimental provider, not an upstream built-in |
