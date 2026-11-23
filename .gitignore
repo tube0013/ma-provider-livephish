@@ -1,0 +1,10 @@
+__pycache__/
+*.py[co]
+.venv/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+# the data of the server that `scripts/run.sh` starts
+.data/
+.DS_Store

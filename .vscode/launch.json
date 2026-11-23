@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Music Assistant",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "music_assistant",
+      "args": ["--data-dir", ".data", "--cache-dir", ".data/.cache", "--dev-providers-dir", ".", "--log-level", "info"],
+      "env": {"PYTHONDEVMODE": "1"},
+      "justMyCode": false
+    }
+  ]
+}

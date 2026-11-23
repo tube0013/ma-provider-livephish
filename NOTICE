@@ -1,0 +1,23 @@
+LivePhish community provider for Music Assistant
+
+Music Assistant server and community-provider-template
+Copyright The Music Assistant Authors
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+https://github.com/music-assistant/server
+https://github.com/music-assistant/community-provider-template
+
+The Python provider and its tests were extracted from the maintainer's experimental
+Music Assistant checkout. This standalone adaptation adds packaging, safety fixes,
+regression tests and release documentation. The built-in Nugs provider informed the
+Music Assistant integration.
+
+Background API research reference:
+https://github.com/jlamons/LivePhish-Downloader
+Inspected revision: 1009d19c8e9c2404807e59430c2fdd7a1e8ce394
+No license file was present in that reference checkout. Its Go source and downloader
+are not distributed here. This notice grants no license to that project's source.
+The maintainer should confirm provenance of the original experimental implementation
+before publication; credit alone does not supply a missing source license.
+
+LivePhish, Nugs and Phish names belong to their respective owners. This project has
+no partnership, sponsorship or endorsement from them.

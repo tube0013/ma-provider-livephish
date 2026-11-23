@@ -1,0 +1,6 @@
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        # the registry's checks are followed as they change
+        "music-assistant/community-catalog/*": ref-pin

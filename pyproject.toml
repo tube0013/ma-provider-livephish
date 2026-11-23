@@ -1,0 +1,139 @@
+[project]
+name = "ma-provider-livephish"
+version = "0.1.0"
+description = "LivePhish music provider for Music Assistant"
+license = "Apache-2.0"
+requires-python = ">=3.14"
+dependencies = []
+
+[dependency-groups]
+dev = [
+  # the server version this provider is developed against: a release tag or a commit after the @;
+  # change it and run `uv lock` to move to another
+  "music-assistant @ git+https://github.com/music-assistant/server@126c6d646ec14ee680e7051258e82dab0a09bac2",
+  # the requirements of the server's Sendspin provider, which it starts at every boot; they follow
+  # music_assistant/providers/sendspin/manifest.json of the server
+  "aiosendspin[server]==10.3.0",
+  "av==19.0.2",
+  "codespell==2.4.3",
+  "mypy==2.3.0",
+  "pre-commit==4.6.2",
+  "pytest==9.1.1",
+  "pytest-aiohttp==1.1.1",
+  "pytest-timeout==2.4.0",
+  "ruff==0.16.5",
+]
+
+[tool.uv]
+# the provider is loaded by the server from its folder, never installed as a package
+package = false
+
+[[tool.uv.index]]
+explicit = true
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+
+# the server takes torch from the CPU index; PyPI's Linux build pulls in gigabytes of GPU libraries
+[tool.uv.sources]
+torch = {index = "pytorch-cpu"}
+torchaudio = {index = "pytorch-cpu"}
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+timeout = 120
+
+[tool.mypy]
+platform = "linux"
+python_version = "3.14"
+files = ["."]
+exclude = ['^\.venv/']
+ignore_missing_imports = true
+check_untyped_defs = true
+disable_error_code = [
+  "annotation-unchecked",
+  "import-not-found",
+  "import-untyped",
+]
+disallow_any_generics = true
+disallow_incomplete_defs = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_decorators = true
+disallow_untyped_defs = true
+enable_error_code = [
+  "ignore-without-code",
+  "possibly-undefined",
+  "redundant-self",
+  "truthy-iterable",
+]
+extra_checks = true
+local_partial_types = true
+no_implicit_optional = true
+no_implicit_reexport = true
+show_error_codes = true
+strict_equality = true
+strict_optional = true
+warn_no_return = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+warn_unused_ignores = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py314"
+
+[tool.ruff.format]
+line-ending = "lf"
+
+[tool.ruff.lint]
+select = ["ALL"]
+# the multi-line docstring summary starts on the line after the quotes
+extend-select = ["D213"]
+ignore = [
+  "ANN002", # Just annoying, not really useful
+  "ANN003", # Just annoying, not really useful
+  "ANN401", # Opinioated warning on disallowing dynamically typed expressions
+  "ARG002", # A provider implements methods whose arguments it does not always need
+  "ASYNC109", # Not relevant, since we use helpers with configurable timeouts
+  "ASYNC240", # Not relevant, we use asyncio not trio/anyio
+  "COM812", # Conflicts with the Ruff formatter
+  "CPY001", # Just annoying, not really useful
+  "D203", # Conflicts with other rules
+  "D417", # False positives in some occasions
+  "E501", # Handled by ruff formatter
+  "EM101", # Just annoying, not really useful
+  "EM102", # Just annoying, not really useful
+  "FIX002", # Just annoying, not really useful
+  "N818", # Just annoying, not really useful
+  "PLR2004", # Just annoying, not really useful
+  "S101", # assert is often used to satisfy type checking
+  "TC001", # Just annoying, not really useful
+  "TC003", # Just annoying, not really useful
+  "TD002", # Just annoying, not really useful
+  "TD003", # Just annoying, not really useful
+  "TRY003", # Just annoying, not really useful
+]
+
+[tool.ruff.lint.pydocstyle]
+# Sphinx-style docstrings with :param:
+convention = "pep257"
+
+[tool.ruff.lint.per-file-ignores]
+# command line scripts
+"scripts/**" = ["INP001", "T201"]
+# Fixtures inspect cache/auth state and use synthetic secrets and boolean parameters.
+"tests/**" = ["SLF001", "S105", "FBT001"]
+
+[tool.ruff.lint.flake8-pytest-style]
+fixture-parentheses = false
+mark-parentheses = false
+
+[tool.ruff.lint.isort]
+known-first-party = ["music_assistant"]
+
+[tool.codespell]
+skip = "uv.lock,LICENSE,*/translations/*"

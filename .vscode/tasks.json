@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run Music Assistant",
+      "detail": "Start the server in dev mode with the provider from this repository",
+      "type": "shell",
+      "command": "scripts/run.sh",
+      "isBackground": true,
+      "problemMatcher": []
+    }
+  ]
+}

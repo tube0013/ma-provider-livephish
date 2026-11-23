@@ -1,0 +1,23 @@
+{
+  "type": "music",
+  "domain": "livephish",
+  "stage": "alpha",
+  "name": "LivePhish",
+  "description": "Browse and play the LivePhish catalog, including Phish and side projects.",
+  "codeowners": [
+    "@tube0013"
+  ],
+  "requirements": [],
+  "multi_instance": false,
+  "documentation": "https://github.com/tube0013/ma-provider-livephish#readme",
+  "provides": [
+    "artist",
+    "album",
+    "track",
+    "playlist"
+  ],
+  "support_url": "https://github.com/tube0013/ma-provider-livephish/issues",
+  "credits": [
+    "Music Assistant community provider template and Nugs provider (Apache-2.0)."
+  ]
+}
